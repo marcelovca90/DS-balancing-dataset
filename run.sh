@@ -57,13 +57,15 @@ for ((i=0; i<${#datasets[@]}; i++)); do
     echo ======== Processing ========
     echo Started processing dataset $id at $(date).
 
-    # AutoGluon
+    # AutoGluon and SDV
     echo ======== AutoGluon ========
-    python -m venv venv-autogluon
+    python3.8 -m venv venv-autogluon
     source ./venv-autogluon/bin/activate
     python -m pip install --upgrade pip
-    python -m pip install --upgrade setuptools wheel future autogluon
-    python -m pip install optuna imbalanced-learn sdmetrics sdv torch
+    python -m pip install --upgrade setuptools wheel
+    python -m pip install pandas scikit-learn scikit-multilearn optuna imbalanced-learn
+    python -m pip install torch==2.0.1+cpu torchvision==0.15.2+cpu --index-url https://download.pytorch.org/whl/cpu
+    python -m pip install autogluon.tabular[all] sdv
     python ./pipeline_optuna_autobalancing.py $dataset_name $target_name autogluon $seed
 
     # Delete AutoGluon models from last execution
