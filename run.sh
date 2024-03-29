@@ -13,12 +13,18 @@
 #   - 1466      cardiotocography                2126x24x10
 #   - 40691     wine-quality                    1599x12x6
 #   - 40975     car                             1728x7x4
+# - multilabel:
+#   - 41465     emotions                        593x78x6
+#   - 41468     image                           2000x140x5
+#   - 41470     reuters                         2000x250x7
+#   - 41471     scene                           2407x300x6
+#   - 41473     yeast                           2417x117x14
 
 
 password=YOUR_SUDO_PASSWORD
-datasets=("openml_37" "openml_44" "openml_1462" "openml_1479" "openml_1510" "openml_23" "openml_181" "openml_1466" "openml_40691" "openml_40975")
-targets=("class" "class" "Class" "Class" "Class" "Contraceptive_method_used" "class_protein_localization" "Class" "class" "class")
-seeds=(23 41 13 47 53 37 47 2 67 5)
+datasets=("openml_37" "openml_44" "openml_1462" "openml_1479" "openml_1510" "openml_23" "openml_181" "openml_1466" "openml_40691" "openml_40975" "openml_41465" "openml_41468" "openml_41470" "openml_41471" "openml_41473")
+targets=("class" "class" "Class" "Class" "Class" "Contraceptive_method_used" "class_protein_localization" "Class" "class" "class" "class_ps" "class_ps" "class_ps" "class_ps" "class_ps")
+seeds=(23 41 13 47 53 37 47 2 67 5 19 19 17 37 13)
 
 echo Script execution started at $(date).
 
