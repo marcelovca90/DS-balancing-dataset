@@ -20,10 +20,7 @@
 #   - 41471     scene                           2407x300x6
 #   - 41473     yeast                           2417x117x14
 
-
-password=YOUR_SUDO_PASSWORD
-datasets=("openml_37" "openml_44" "openml_1462" "openml_1479" "openml_1510" "openml_23" "openml_181" "openml_1466" "openml_40691" "openml_40975" "openml_41465" "openml_41468" "openml_41470" "openml_41471" "openml_41473")
-targets=("class" "class" "Class" "Class" "Class" "Contraceptive_method_used" "class_protein_localization" "Class" "class" "class" "class_ps" "class_ps" "class_ps" "class_ps" "class_ps")
+datasets=(37 44 1462 1479 1510 23 181 1466 40691 40975 41465 41468 41470 41471 41473)
 seeds=(23 41 13 47 53 37 47 2 67 5 19 19 17 37 13)
 
 echo Script execution started at $(date).
@@ -48,30 +45,31 @@ rm artifacts/optuna_dbs/* &> /dev/null
 rm artifacts/sdv_cache/* &> /dev/null
 echo Finished cleaning files from previous executions at $(date).
 
+# Virtual Environment
+echo ======== Virtual Environment ========
+python3.8 -m venv venv-autogluon
+source ./venv-autogluon/bin/activate
+python -m pip install --upgrade pip
+python -m pip install --upgrade setuptools wheel
+python -m pip install pandas scikit-learn scikit-multilearn optuna imbalanced-learn
+python -m pip install torch==2.0.1+cpu torchvision==0.15.2+cpu --index-url https://download.pytorch.org/whl/cpu
+python -m pip install autogluon.tabular[all] sdv
+
+# Execution
 for ((i=0; i<${#datasets[@]}; i++)); do 
 
-    dataset_name="${datasets[i]}"
+    dataset_id="${datasets[i]}"
     target_name="${targets[i]}"
     seed="${seeds[i]}"
 
-    echo ======== Processing ========
+    echo ======== Execution ========
     echo Started processing dataset $id at $(date).
 
-    # AutoGluon and SDV
-    echo ======== AutoGluon ========
-    python3.8 -m venv venv-autogluon
-    source ./venv-autogluon/bin/activate
-    python -m pip install --upgrade pip
-    python -m pip install --upgrade setuptools wheel
-    python -m pip install pandas scikit-learn scikit-multilearn optuna imbalanced-learn
-    python -m pip install torch==2.0.1+cpu torchvision==0.15.2+cpu --index-url https://download.pytorch.org/whl/cpu
-    python -m pip install autogluon.tabular[all] sdv
-    python ./pipeline_optuna_autobalancing.py $dataset_name $target_name autogluon $seed
+    python ./pipeline_optuna_autobalancing.py $dataset_id autogluon $seed
 
-    # Delete AutoGluon models from last execution
+    echo Finished processing dataset $dataset_id at $(date).
+
     rm -rf ./AutogluonModels/
-
-    echo Finished processing dataset $dataset_name at $(date).
 
 done
 
