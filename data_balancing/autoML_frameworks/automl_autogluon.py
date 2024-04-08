@@ -16,8 +16,9 @@ def fit_eval(X_train, X_test, y_train, y_test):
     train_df = pd.DataFrame(X_train).assign(**{'class': pd.Series(y_train)}).dropna()
     test_df = pd.DataFrame(X_test).assign(**{'class': pd.Series(y_test)}).dropna()
 
-    clf = TabularPredictor(eval_metric='accuracy', 
-                           label='class', 
+    clf = TabularPredictor(problem_type=infer_task_type(y_test),
+                           eval_metric='accuracy',
+                           label='class',
                            verbosity=0)
 
     clf = clf.fit(time_limit=EXEC_TIME_SECONDS, train_data=train_df)
