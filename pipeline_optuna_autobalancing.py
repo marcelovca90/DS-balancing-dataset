@@ -55,6 +55,11 @@ def run_pipeline(dataset_id: int, framework_name: str):
                     X.loc[:, col] = pd.Series(pd.factorize(X[col])[0])
             y = pd.Series(pd.factorize(y)[0])
         
+        col_mappings = {
+            col_name: f'feature_{col_idx}' \
+            for col_idx, col_name in enumerate(X.columns.tolist(), start=1)}
+        X.rename(columns=col_mappings, inplace=True)
+
         X_train, X_test, y_train, y_test = _train_test_split(X, y)
 
         full_data = X.assign(**{dataset_target: y})

@@ -1,4 +1,4 @@
-Wifes_age,Wifes_education,Husbands_education,Number_of_children_ever_born,Wifes_religion,Wifes_now_working%3F,Husbands_occupation,Standard-of-living_index,Media_exposure,class
+feature_1,feature_2,feature_3,feature_4,feature_5,feature_6,feature_7,feature_8,feature_9,class
 24,0,0,3,0,0,0,0,0,0
 45,1,0,10,0,0,1,1,0,0
 43,0,0,7,0,0,1,1,0,0
