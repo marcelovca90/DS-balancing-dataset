@@ -55,6 +55,12 @@ python -m pip install pandas scikit-learn scikit-multilearn optuna imbalanced-le
 python -m pip install torch==2.0.1+cpu torchvision==0.15.2+cpu --index-url https://download.pytorch.org/whl/cpu
 python -m pip install autogluon.tabular[all] sdv
 
+# Raise exception in case CTGANSynthesizer is likely to be slow
+# https://github.com/sdv-dev/SDV/issues/1658
+# https://github.com/sdv-dev/SDV/issues/1657
+sed -i 's/, NotFittedError/, NotFittedError, SamplingError/' venv-autogluon/lib/python3.8/site-packages/sdv/single_table/ctgan.py
+sed -i 's/print(  # noqa: T001/raise SamplingError(/' venv-autogluon/lib/python3.8/site-packages/sdv/single_table/ctgan.py
+
 # Execution
 for ((i=0; i<${#datasets[@]}; i++)); do 
 

@@ -103,25 +103,26 @@ class Objective:
         _description = (f"{over_method_name}: {over_threshold} == {under_method_name}: {under_threshold}")
         print(_description)
 
-        # Get undersampling model
-        under_method = get_under_method(
-            dataset=self.train_dataset,
-            target=self.target,
-            method_name=under_method_name,
-            project_id=self.project_id,
-            base_path=self.save_models_path
-        )
-
-        # Get oversampling model
-        over_method = get_over_method(
-            dataset=self.train_dataset,
-            target=self.target,
-            method_name=over_method_name,
-            project_id=self.project_id,
-            base_path=self.save_models_path
-        )
-
         try:
+
+            # Get undersampling model
+            under_method = get_under_method(
+                dataset=self.train_dataset,
+                target=self.target,
+                method_name=under_method_name,
+                project_id=self.project_id,
+                base_path=self.save_models_path
+            )
+
+            # Get oversampling model
+            over_method = get_over_method(
+                dataset=self.train_dataset,
+                target=self.target,
+                method_name=over_method_name,
+                project_id=self.project_id,
+                base_path=self.save_models_path
+            )
+
             balanced_data = self.train_dataset.copy()
 
             # Generate oversampled data
