@@ -45,15 +45,31 @@ def run_pipeline(dataset_id: int, framework_name: str):
     else:
         dataset = fetch_openml(data_id=dataset_id, return_X_y=False)
         X, y = dataset.data.copy(deep=True), dataset.target.copy(deep=True)
-        if dataset_id in [41465, 41468, 41470, 41471, 41473]:
+        if dataset_id in [285, 41464, 41465, 41468, 41470, 41471, 41473]:
+            if dataset_id == 285: # flags
+                df = pd.concat([X, y], axis='columns')
+                label_columns = [
+                    'crescent', 'triangle', 'icon', 'animate', 'text', 'red',
+                    'green', 'blue', 'gold', 'white', 'black', 'orange'
+                ]
+                y = df[label_columns].astype(int)  # Select only label columns
+                for col in y.columns.values:
+                    y[col] = y[col].map({0: 'FALSE', 1: 'TRUE'})
+                X = df.drop(columns=label_columns).infer_objects()  # Drop label columns to get remaining ones
+                for col in X.columns:
+                    if col not in ['mainhue', 'topleft', 'botright']:
+                        X[col] = X[col].astype(float)
+                assert df.shape[0] == X.shape[0] # rows
+                assert df.shape[0] == y.shape[0] # rows
+                assert df.shape[1] == X.shape[1] + y.shape[1] # columns
             for col in y.columns.values:
                 y[col] = y[col].map({'FALSE': 0, 'TRUE': 1}).to_numpy()
-            y = pd.Series(LabelPowerset().transform(y))
+            y = pd.Series(LabelPowerset().transform(y), name="class")
         else:
             for col in X.columns.values:
                 if X[col].dtype.name == 'category':
                     X.loc[:, col] = pd.Series(pd.factorize(X[col])[0])
-            y = pd.Series(pd.factorize(y)[0])
+            y = pd.Series(pd.factorize(y)[0], name="class")
         
         col_mappings = {
             col_name: f'feature_{col_idx}' \
