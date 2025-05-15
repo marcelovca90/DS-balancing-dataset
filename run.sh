@@ -74,7 +74,7 @@ sed -i 's/print(  # noqa: T001/raise SamplingError(/' venv-autogluon/lib/python3
 for ((i=0; i<${#datasets[@]}; i++)); do 
 
     dataset_id="${datasets[i]}"
-    target_name="${targets[i]}"
+    target_name="class"
     seed="${seeds[i]}"
 
     echo ======== Execution ========
