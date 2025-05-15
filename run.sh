@@ -1,39 +1,37 @@
 #!/bin/bash
 
-# +---------------------------------------------------------------------------------------------------------------------------+
-# |                                 OpenML Datasets (https://www.openml.org/search?type=data)                                 |
-# +------------+--------+-----------------------------+----------------+-----------+----------+------------------+------------+
-# | Type       | ID     | Dataset Name                | Data Type      | Instances | Features | Classes (Labels) | Complexity |
-# |------------|--------|-----------------------------|----------------|-----------|----------|------------------|------------|
-# |            | 31     | credit-g                    | Mixed          | 1,000     | 20       | 2                | 0.040      |
-# |            | 37     | diabetes                    | Quantitative   | 768       | 8        | 2                | 0.021      |
-# |            | 44     | spambase                    | Quantitative   | 4,601     | 57       | 2                | 0.025      |
-# | Binary     | 1462   | bank-note-authentication    | Quantitative   | 1,372     | 4        | 2                | 0.006      |
-# |            | 1479   | hill-valley                 | Quantitative   | 1,212     | 100      | 2                | 0.165      |
-# |            | 1510   | wdbc                        | Quantitative   | 569       | 30       | 2                | 0.105      |
-# |            | 40945  | titanic                     | Mixed          | 1,309     | 13       | 2                | 0.020      |
-# |------------|--------|-----------------------------|----------------|-----------|----------|------------------|------------|
-# |            | 23     | contraceptive-method-choice | Mixed          | 1,473     | 9        | 3                | 0.018      |
-# |            | 36     | segment                     | Mixed          | 2,310     | 19       | 7                | 0.058      |
-# |            | 54     | vehicle                     | Quantitative   | 846       | 18       | 4                | 0.085      |
-# | Multiclass | 181    | yeast                       | Mixed          | 1,484     | 8        | 10               | 0.054      |
-# |            | 1466   | cardiotocography            | Mixed          | 2,126     | 35       | 10               | 0.165      |
-# |            | 40691  | wine-quality-red            | Quantitative   | 1,599     | 11       | 6                | 0.041      |
-# |            | 40975  | car                         | Qualitative    | 1,728     | 6        | 4                | 0.014      |
-# |------------|--------|-----------------------------|----------------|-----------|----------|------------------|------------|
-# |            | 285    | flags                       | Mixed          | 194       | 17       | 12 (103)         | 4.336      |
-# |            | 41464  | birds                       | Mixed          | 645       | 260      | 19 (133)         | 7.766      |
-# |            | 41465  | emotions                    | Mixed          | 593       | 72       | 6 (27)           | 1.361      |
-# | Multilabel | 41468  | image                       | Quantitative   | 2,000     | 135      | 5 (20)           | 0.417      |
-# |            | 41470  | reuters                     | Mixed          | 2,000     | 243      | 7 (25)           | 0.981      |
-# |            | 41471  | scene                       | Quantitative   | 2,407     | 294      | 6 (15)           | 0.787      |
-# |            | 41473  | yeast                       | Quantitative   | 2,417     | 103      | 14 (198)         | 2.528      |
-# +------------+--------+-----------------------------+----------------+-----------+----------+------------------+------------+
+# +--------------------------------------------------------------------------------------------------------------+
+# |                                 OpenML Datasets (https://www.openml.org/search?type=data)                    |
+# +------------+--------+-----------------------------+----------------+-----------+----------+------------------+
+# | Type       | ID     | Dataset Name                | Data Type      | Instances | Features | Classes (Labels) |
+# |------------|--------|-----------------------------|----------------|-----------|----------|------------------|
+# |            | 31     | credit-g                    | Mixed          | 1,000     | 20       | 2                |
+# |            | 37     | diabetes                    | Quantitative   | 768       | 8        | 2                |
+# |            | 44     | spambase                    | Quantitative   | 4,601     | 57       | 2                |
+# | Binary     | 1462   | bank-note-authentication    | Quantitative   | 1,372     | 4        | 2                |
+# |            | 1479   | hill-valley                 | Quantitative   | 1,212     | 100      | 2                |
+# |            | 1510   | wdbc                        | Quantitative   | 569       | 30       | 2                |
+# |            | 40945  | titanic                     | Mixed          | 1,309     | 13       | 2                |
+# |------------|--------|-----------------------------|----------------|-----------|----------|------------------|
+# |            | 23     | contraceptive-method-choice | Mixed          | 1,473     | 9        | 3                |
+# |            | 36     | segment                     | Mixed          | 2,310     | 19       | 7                |
+# |            | 54     | vehicle                     | Quantitative   | 846       | 18       | 4                |
+# | Multiclass | 181    | yeast                       | Mixed          | 1,484     | 8        | 10               |
+# |            | 1466   | cardiotocography            | Mixed          | 2,126     | 35       | 10               |
+# |            | 40691  | wine-quality-red            | Quantitative   | 1,599     | 11       | 6                |
+# |            | 40975  | car                         | Qualitative    | 1,728     | 6        | 4                |
+# |------------|--------|-----------------------------|----------------|-----------|----------|------------------|
+# |            | 285    | flags                       | Mixed          | 194       | 17       | 12 (103)         |
+# |            | 41464  | birds                       | Mixed          | 645       | 260      | 19 (133)         |
+# |            | 41465  | emotions                    | Mixed          | 593       | 72       | 6 (27)           |
+# | Multilabel | 41468  | image                       | Quantitative   | 2,000     | 135      | 5 (20)           |
+# |            | 41470  | reuters                     | Mixed          | 2,000     | 243      | 7 (25)           |
+# |            | 41471  | scene                       | Quantitative   | 2,407     | 294      | 6 (15)           |
+# |            | 41473  | yeast                       | Quantitative   | 2,417     | 103      | 14 (198)         |
+# +------------+--------+-----------------------------+----------------+-----------+----------+------------------+
 
-# datasets=(37 44 1462 1479 1510 23 181 1466 40691 40975 41465 41468 41470 41471 41473)
-# seeds=(23 41 13 47 53 37 47 2 67 5 19 19 17 37 59)
-datasets=(31 40945 36 54 285 41464)
-seeds=(17 2 5 23 2 2)
+datasets=(37 44 1462 1479 1510 23 181 1466 40691 40975 41465 41468 41470 41471 41473)
+seeds=(23 41 13 47 53 37 47 2 67 5 19 19 17 37 59)
 
 echo Script execution started at $(date).
 
@@ -41,7 +39,7 @@ echo Script execution started at $(date).
 echo ======== Preparation ========
 echo Started cleaning files from previous executions at $(date).
 rm -rf __pycache* &> /dev/null
-# rm -rf artifacts/optuna_models/* &> /dev/null
+rm -rf artifacts/optuna_models/* &> /dev/null
 rm -rf autobalancer_models* &> /dev/null
 rm -rf autobalancer_results* &> /dev/null
 rm -rf autobalancer_optuna_results* &> /dev/null
@@ -50,11 +48,11 @@ rm -rf gama* &> /dev/null
 rm -rf results* &> /dev/null
 rm -rf structured* &> /dev/null
 rm -rf venv-* &> /dev/null
-# rm artifacts/autobalancer_datasets/*_train.csv &> /dev/null
-# rm artifacts/autobalancer_datasets/*_test.csv &> /dev/null
-# rm artifacts/exec_logs/* &> /dev/null
-# rm artifacts/optuna_dbs/* &> /dev/null
-# rm artifacts/sdv_cache/* &> /dev/null
+rm artifacts/autobalancer_datasets/*_train.csv &> /dev/null
+rm artifacts/autobalancer_datasets/*_test.csv &> /dev/null
+rm artifacts/exec_logs/* &> /dev/null
+rm artifacts/optuna_dbs/* &> /dev/null
+rm artifacts/sdv_cache/* &> /dev/null
 echo Finished cleaning files from previous executions at $(date).
 
 # Virtual Environment
@@ -80,7 +78,7 @@ for ((i=0; i<${#datasets[@]}; i++)); do
     echo ======== Execution ========
     echo Started processing dataset $id at $(date).
 
-    python ./pipeline_optuna_autobalancing.py $dataset_id autogluon $seed
+    python ./py_pipeline_optuna_autobalancing.py $dataset_id autogluon $seed
 
     echo Finished processing dataset $dataset_id at $(date).
 
