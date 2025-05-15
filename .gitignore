@@ -159,7 +159,6 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
-results/
 metrics/
 models/
 datasets/
@@ -169,5 +168,4 @@ autobalancer_*/
 structured_data_classifier/
 venv-*/
 optuna_models/*
-artifacts/*
 *.db
